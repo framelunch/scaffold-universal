@@ -1,21 +1,15 @@
 <%
 const conf = {
     title : 'top',
-    description : 'This is top page',
+    description : 'universal application',
     style: 'index.css',
-    script: 'index.js'
+    script: ['vendor.bundle.js', 'index.js']
 };
 %>
 
 <% include _head.ejs %>
-<% include ../modules/header/header.ejs %>
 
-<div>
-    <h1>main page aaaa</h1>
-    <img src="/assets/img_about.png">
-</div>
+<div id="app"><%- component %></div>
+<script id="initial-data" type="text/plain" data-json='<%- appState %>'></script>
 
-<div id="app"></div>
-
-<% include ../modules/footer/footer.ejs %>
 <% include _foot.ejs %>

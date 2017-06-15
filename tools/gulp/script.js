@@ -14,7 +14,7 @@ gulp.task('script', () => (
     .pipe(browser.reload({stream: true}))
 ));
 
-gulp.task('b.script', () => {
+gulp.task('b.script', () => (
   webpackStream(confProduction, webpack)
     .pipe(gulp.dest(`${conf.dest.build}/js`))
-});
+));

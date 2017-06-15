@@ -5,16 +5,30 @@ import nested from 'postcss-nested';
 import importCss from 'postcss-import';
 import autoprefixer from 'autoprefixer';
 import conf from '../config';
+import { browserslist } from '../../package.json';
+
+const babelOptions = {
+  presets: [
+    ['env', {
+      targets: { browsers: browserslist },
+      debug: process.env.NODE_ENV === 'development'
+    }],
+    'react'
+  ],
+  plugins: [
+    'transform-object-rest-spread'
+  ],
+  cacheDirectory: true,
+  babelrc: false
+};
 
 const entry = {
   vendor: [
     'babel-polyfill',
     'react',
     'react-dom',
+    'react-router-dom',
     'redux',
-    'animejs',
-    'rx-lite',
-    'jquery'
   ],
 };
 
@@ -43,9 +57,7 @@ export default {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
-          options: {
-            cacheDirectory: true,
-          },
+          options: babelOptions
         },
       },
       {

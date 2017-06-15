@@ -1,7 +1,5 @@
 @import "_variables.css";
 @import "_reset.css";
-@import "../modules/header/header.css";
-@import "../modules/footer/footer.css";
 
 body {
     background: lightblue;

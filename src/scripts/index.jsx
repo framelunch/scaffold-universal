@@ -1,59 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
-import anime from 'animejs';
-import Rx from 'rx-lite';
-import MainVisual from '../components/MainVisual/MainVisual';
+import { BrowserRouter } from 'react-router-dom';
+import Routes from '../app/Routes';
+import { store, actions } from '../app/Store';
 
-/* With an observer */
-const observer = Rx.Observer.create(
-  (x) => {
-    console.log('Next: %s', x);
-  },
-  (err) => {
-    console.log('Error: %s', err);
-  },
-  () => {
-    console.log('Completed');
-  });
+const initialState = JSON.parse(document.querySelector('#initial-data').dataset.json);
 
-const source = Rx.Observable.range(0, 3);
-source.subscribe(observer);
+store.subscribe(() => {
+  console.log(store.getState());
+});
 
-const Home = () => (
-  <div>
-    <h2>Home</h2>
-  </div>
-);
+store.dispatch(actions.initialize(initialState));
+store.dispatch(actions.awake());
 
-const About = () => (
-  <div>
-    <h2>About</h2>
-  </div>
-);
+console.log();
 
 ReactDOM.render((
   <BrowserRouter>
-    <div id="content">
-      <MainVisual name="abdfgkda" />
-      <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/about">About</Link></li>
-      </ul>
-      <Route exact path="/" component={Home} />
-      <Route path="/about" component={About} />
-    </div>
+    <Routes />
   </BrowserRouter>
 ), document.getElementById('app'));
-
-anime({
-  targets: '#content',
-  translateX: [
-    { value: 100, duration: 1200 },
-    { value: 0, duration: 800 },
-  ],
-  rotate: '1turn',
-  backgroundColor: '#00ff00',
-  duration: 2000,
-  loop: false,
-});
