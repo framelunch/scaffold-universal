@@ -7,12 +7,11 @@
 
     ga('create', '', 'auto');
     ga('send', 'pageview');
-
 </script>
 
 <script src="/js/vendor.bundle.js"></script>
-<% for(var j=0; j<conf.script.length; j++){ %>
-<script src="/js/<%=conf.script[j]%>"></script>
+<% for (let i = 0; i < conf.script.length; i++) { %>
+<script src="/js/<%= conf.script[i] %>"></script>
 <% } %>
 
 </body>
