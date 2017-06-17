@@ -43,15 +43,16 @@ gulp.task('server', ['nodemon'], () => (
 gulp.task('dev', cb => (
   runSequence(
     'clean',
-    ['style', 'script'],
+    ['view', 'style', 'script', 'script.app', 'script.server'],
     'server',
     cb,
   )
 ));
 
 gulp.task('default', ['dev'], () => {
+  gulp.watch(conf.view.watch, ['view']);
   gulp.watch(conf.style.watch, ['style']);
-  gulp.watch(conf.script.watch, ['script']);
+  gulp.watch(conf.script.watch, ['script', 'script.app', 'script.server']);
 });
 
 gulp.task('build', function (cb) {

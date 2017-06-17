@@ -9,14 +9,37 @@ export default {
     assets: ['src/assets/**/*'],
   },
 
+  view: {
+    src: ['src/views/**/*.ejs', '!src/views/**/_*'],
+    watch: ['src/views/**/*.ejs'],
+    rename(path) {
+      if (path.basename !== 'index') {
+        let basename = 'index';
+        let dirname = `${path.dirname}/`;
+
+        dirname += path.basename.split('.').reduce((str, item) => {
+          if (item.charAt(0) === '$') {
+            basename = item.substr(1);
+          } else {
+            str += `${item}/`;
+          }
+          return str;
+        }, '');
+
+        path.basename = basename;
+        path.dirname = dirname;
+      }
+    },
+  },
+
   style: {
     src: ['src/styles/**/*.css', '!src/styles/**/_*'],
-    watch: ['src/styles/**/*.css', 'src/modules/**/*.css']
+    watch: ['src/styles/**/*.css']
   },
 
   script: {
     src: ['src/scripts/**/*.{js,jsx}', '!src/scripts/**/_*'],
-    watch: ['src/scripts/**/*', 'src/components/**/*', 'src/modules/**/*.{js,jsx}', 'src/libs/**/*.js']
+    watch: ['src/**/*.{js,jsx}']
   },
 
   browser: {
@@ -27,16 +50,17 @@ export default {
   },
 
   nodemon: {
-    script: 'src/server.js',
-    ext: 'js jsx ejs',
-    ignore: ['node_modules', 'tools', 'deploy', 'app'],
+    script: '.tmp/server.build.js',
+    ext: 'js',
+    ignore: ['node_modules', 'tools', 'deploy', 'src', '.tmp/js'],
     execMap: {
-      js: "babel-node --debug --presets env,react --inspect"
+      js: "node --harmony"
     },
     env: {
       NODE_ENV: 'development',
       PORT: 9078,
-      DOMAIN: 'http://localhost:9078'
-    }
+      DOMAIN: 'http://localhost:9077'
+    },
+    watch: ['.tmp']
   }
 };

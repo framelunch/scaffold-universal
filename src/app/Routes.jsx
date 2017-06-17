@@ -92,7 +92,7 @@ export default () => (
     </ul>
 
     <hr />
-    <MainVisual name="abdfgkda" />
+    <MainVisual name="jjjjjj" />
     <hr />
 
     <Switch>

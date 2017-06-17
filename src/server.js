@@ -5,8 +5,6 @@ import config from './config/environment';
 import configExpress from './config/express';
 import configRoutes from './routes';
 
-console.log(config);
-
 const { port, mail, env } = config;
 const app = express();
 const server = Http.createServer(app);

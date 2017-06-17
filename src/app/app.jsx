@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import Routes from '../app/Routes';
-import { store, actions } from '../app/Store';
+import Routes from '../app/routes';
+import { store, actions } from '../app/store';
 
 const initialState = JSON.parse(document.querySelector('#initial-data').dataset.json);
 

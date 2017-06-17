@@ -14,7 +14,6 @@ import cssnano from 'cssnano';
 import browser from 'browser-sync';
 
 import conf from '../config';
-import { browserslist } from '../../package.json';
 
 const urlOptions = [
   { filter: ['./**/*'], url: 'inline' },
@@ -32,7 +31,7 @@ gulp.task('style', () => (
       flexbugsFixes,
       nthChildFix,
       url(urlOptions),
-      autoprefixer({ browsers: browserslist }),
+      autoprefixer,
     ]))
     .pipe(gulp.dest(`${conf.dest.dev}/css`))
     .pipe(browser.reload({stream: true}))

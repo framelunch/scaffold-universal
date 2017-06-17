@@ -4,7 +4,7 @@ import customProperties from 'postcss-custom-properties';
 import nested from 'postcss-nested';
 import importCss from 'postcss-import';
 import autoprefixer from 'autoprefixer';
-import conf from '../config';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import { browserslist } from '../../package.json';
 
 const babelOptions = {
@@ -22,27 +22,9 @@ const babelOptions = {
   babelrc: false
 };
 
-const entry = {
-  vendor: [
-    'babel-polyfill',
-    'react',
-    'react-dom',
-    'react-router-dom',
-    'redux',
-  ],
-};
-
-globby.sync(conf.script.src)
-  .forEach((filename) => {
-    const basename = path.basename(filename, path.extname(filename));
-    entry[basename] = `./${filename}`;
-  });
-
 export default {
-  entry,
   output: {
-    filename: '[name].js',
-    sourceMapFilename: '[name].map', //inline-source-mapの時は特に必要ないが一応
+    filename: 'js/[name].js'
   },
   resolve: {
     modules: [
@@ -62,28 +44,30 @@ export default {
       },
       {
         test: /\.css$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1,
-              localIdentName: '[name]-[local]-[hash:base64:5]',
-              modules: true
+        use: ExtractTextPlugin.extract({
+          //fallback: "style-loader",
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                importLoaders: 1,
+                localIdentName: '[name]-[local]-[hash:base64:5]',
+                modules: true
+              }
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: (loader) => [
+                  customProperties,
+                  nested,
+                  importCss({root: loader.resourcePath}),
+                  autoprefixer
+                ]
+              }
             }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: (loader) => [
-                customProperties,
-                nested,
-                importCss({root: loader.resourcePath}),
-                autoprefixer
-              ]
-            }
-          }
-        ]
+          ]
+        })
       },
       {
         test: /\.(jpg|png|gif|svg)$/,
@@ -95,5 +79,5 @@ export default {
         }
       }
     ],
-  },
+  }
 };

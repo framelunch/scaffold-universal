@@ -1,0 +1,15 @@
+<%
+const conf = {
+    title : 'app | universal application',
+    description : 'spa page',
+    style: 'app.css',
+    script: ['app.js']
+};
+%>
+
+<% include ../views/_head.ejs %>
+
+<div id="app"><%- component %></div>
+<script id="initial-data" type="text/plain" data-json='<%- appState %>'></script>
+
+<% include ../views/_foot.ejs %>
