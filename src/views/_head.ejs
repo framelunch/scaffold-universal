@@ -23,8 +23,8 @@
     if (typeof conf.style === 'string') { conf.style = [conf.style]; }
     %>
 
-    <% for(var i=0; i<conf.style.length; i++){ %>
-    <link rel="stylesheet" href="/css/<%=conf.style[i]%>">
+    <% for (let i=0; i < conf.style.length; i++) { %>
+    <link rel="stylesheet" href="/css/<%= conf.style[i] %>">
     <% } %>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
