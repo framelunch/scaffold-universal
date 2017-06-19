@@ -6,10 +6,24 @@ import style from './MainVisual.css';
 import clickSvg from './assets/click.svg';
 import iconPng from './assets/icon.png';
 
-export default class MainVisual extends React.Component {
-  props: {
-    name: string
+type Props = {
+  name: string
+};
+
+type State = {
+  dispText: string,
+  radio: string,
+  data: {
+    a: boolean
   }
+};
+
+export default class MainVisual extends React.Component {
+  props: Props;
+  state: State;
+  onChangeInput: (e: Event) => void;
+  onChangeCheckbox: (e: Event) => void;
+  onChangeRadio: (e: Event) => void;
 
   // サーバでメモリリークの原因になるため、こう書くのがよいとのこと
   // https://developers.cyberagent.co.jp/blog/archives/3513/
@@ -19,7 +33,7 @@ export default class MainVisual extends React.Component {
     };
   }
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.state = {
       dispText: this.props.name,
@@ -38,11 +52,13 @@ export default class MainVisual extends React.Component {
     console.log(findDOMNode(this));
   }
 
-  onChangeInput({ target: { value } }) {
+  onChangeInput(e: Event) {
+    const { currentTarget: { value } } = e;
     this.setState(Object.assign({}, this.state, { dispText: value }));
   }
 
-  onChangeCheckbox({ target: { name, checked } }) {
+  onChangeCheckbox(e: Event) {
+    const { target: { name, checked } } = e;
     this.setState(Object.assign({}, this.state, {
       data: Object.assign({}, this.state.data, {
         [name]: checked,
@@ -50,7 +66,8 @@ export default class MainVisual extends React.Component {
     }));
   }
 
-  onChangeRadio({ target: { value }}) {
+  onChangeRadio(e: Event) {
+    const { target: { value }} = e;
     this.setState(Object.assign({}, this.state, { radio: value }));
   }
 

@@ -16,6 +16,7 @@
     "not ie 10"
   ],
   "scripts": {
+    "postinstall": "flow-typed install",
     "start": "NODE_ENV=development gulp",
     "build": "NODE_ENV=production gulp build",
     "gulp:clean": "gulp clean",
@@ -26,7 +27,8 @@
     "lint": "run-p lint:*",
     "lint:style": "stylelint 'src/**/*.css'",
     "lint:script": "eslint --ext .js,.jsx src/",
-    "typecheck": "flow"
+    "flow": "flow",
+    "flow-typed": "flow-typed"
   },
   "private": true,
   "dependencies": {
@@ -56,6 +58,7 @@
     "autoprefixer": "^7.1.1",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
+    "babel-eslint": "^7.2.3",
     "babel-loader": "^7.0.0",
     "babel-plugin-css-modules-transform": "^1.2.7",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
@@ -74,6 +77,7 @@
     "eslint-plugin-react": "^7.0.1",
     "extract-text-webpack-plugin": "^2.1.2",
     "flow-bin": "^0.48.0",
+    "flow-typed": "^2.1.2",
     "globby": "^6.1.0",
     "gulp": "^3.9.1",
     "gulp-ejs": "^3.0.1",
