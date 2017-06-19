@@ -39,7 +39,7 @@ export default {
 
   script: {
     src: ['src/scripts/**/*.{js,jsx}', '!src/scripts/**/_*'],
-    watch: ['src/**/*.{js,jsx}']
+    watch: ['src/**/*']
   },
 
   browser: {
