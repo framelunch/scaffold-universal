@@ -12,25 +12,6 @@ const externals = (() => {
   return result;
 })();
 
-const babelOptions = {
-  presets: [
-    ['env', { debug: process.env.NODE_ENV === 'development' }],
-    'react'
-  ],
-  plugins: [
-    'transform-object-rest-spread',
-    [
-      "css-modules-transform",
-      {
-        "generateScopedName": "[name]-[local]-[hash:base64:5]",
-        "extensions": [".css"]
-      }
-    ]
-  ],
-  cacheDirectory: true,
-  babelrc: false
-};
-
 const base = {
   entry: path.join(__dirname, '../../src/server'),
   output: {
@@ -49,7 +30,24 @@ const base = {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
-          options: babelOptions
+          options: {
+            presets: [
+              ['env', { debug: process.env.NODE_ENV === 'development' }],
+              'react'
+            ],
+            plugins: [
+              'transform-object-rest-spread',
+              [
+                "css-modules-transform",
+                {
+                  "generateScopedName": "[name]-[local]-[hash:base64:5]",
+                  "extensions": [".css"]
+                }
+              ]
+            ],
+            cacheDirectory: true,
+            babelrc: false
+          }
         }
       },
       {
