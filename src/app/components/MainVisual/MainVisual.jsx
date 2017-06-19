@@ -27,7 +27,7 @@ export default class MainVisual extends React.Component {
 
   // サーバでメモリリークの原因になるため、こう書くのがよいとのこと
   // https://developers.cyberagent.co.jp/blog/archives/3513/
-  static get defaultProps() {
+  static get defaultProps(): Props {
     return {
       name: 'test',
     };
@@ -52,23 +52,27 @@ export default class MainVisual extends React.Component {
     console.log(findDOMNode(this));
   }
 
-  onChangeInput(e: Event) {
-    const { currentTarget: { value } } = e;
-    this.setState(Object.assign({}, this.state, { dispText: value }));
+  onChangeInput({ currentTarget }: Event) {
+    if (currentTarget instanceof HTMLInputElement) {
+      this.setState(Object.assign({}, this.state, { dispText: currentTarget.value }));
+    }
   }
 
-  onChangeCheckbox(e: Event) {
-    const { target: { name, checked } } = e;
-    this.setState(Object.assign({}, this.state, {
-      data: Object.assign({}, this.state.data, {
-        [name]: checked,
-      }),
-    }));
+  onChangeCheckbox({ target }: Event) {
+    if (target instanceof HTMLInputElement) {
+      const { name, checked } = target;
+      this.setState(Object.assign({}, this.state, {
+        data: Object.assign({}, this.state.data, {
+          [name]: checked,
+        }),
+      }));
+    }
   }
 
-  onChangeRadio(e: Event) {
-    const { target: { value }} = e;
-    this.setState(Object.assign({}, this.state, { radio: value }));
+  onChangeRadio({ target }: Event) {
+    if (target instanceof HTMLInputElement) {
+      this.setState(Object.assign({}, this.state, { radio: target.value }));
+    }
   }
 
   render() {
