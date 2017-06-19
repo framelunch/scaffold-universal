@@ -9,3 +9,4 @@
 
 [options]
 all=false
+unsafe.enable_getters_and_setters=true
