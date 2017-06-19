@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { findDOMNode } from 'react-dom';
 
@@ -6,6 +7,10 @@ import clickSvg from './assets/click.svg';
 import iconPng from './assets/icon.png';
 
 export default class MainVisual extends React.Component {
+  props: {
+    name: string
+  }
+
   // サーバでメモリリークの原因になるため、こう書くのがよいとのこと
   // https://developers.cyberagent.co.jp/blog/archives/3513/
   static get defaultProps() {

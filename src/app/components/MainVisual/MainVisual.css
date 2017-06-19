@@ -6,7 +6,7 @@
 
 .MainVisual {
     font-size: var(--fontSize);
-    color: red;
+    color: green;
     background: lightblue;
 
     &-child {

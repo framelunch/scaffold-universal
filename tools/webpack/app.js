@@ -41,7 +41,8 @@ const base = {
                 targets: { browsers: browserslist },
                 debug: process.env.NODE_ENV === 'development'
               }],
-              'react'
+              'react',
+              'flow'
             ],
             plugins: [
               'transform-object-rest-spread'
