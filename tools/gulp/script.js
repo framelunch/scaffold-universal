@@ -19,15 +19,12 @@ gulp.task('script.app', () => (
   plumber()
     .pipe(webpackStream(confApp.development, webpack))
     .pipe(gulp.dest(`${conf.dest.dev}`))
-    .pipe(browser.reload({stream: true}))
 ));
 gulp.task('script.server', () => (
   plumber()
     .pipe(webpackStream(confServer.development, webpack))
     .pipe(gulp.dest(`${conf.dest.dev}`))
-    .pipe(browser.reload({stream: true}))
 ));
-
 
 
 gulp.task('b.script', () => (

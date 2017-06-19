@@ -1,5 +1,3 @@
-import globby from 'globby';
-import path from 'path';
 import customProperties from 'postcss-custom-properties';
 import nested from 'postcss-nested';
 import importCss from 'postcss-import';

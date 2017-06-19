@@ -34,7 +34,7 @@ const babelOptions = {
 const base = {
   entry: path.join(__dirname, '../../src/server'),
   output: {
-    filename: 'server.build.js'
+    filename: 'server/server.build.js'
   },
   target: 'node',
   resolve: {

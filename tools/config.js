@@ -50,9 +50,9 @@ export default {
   },
 
   nodemon: {
-    script: '.tmp/server.build.js',
+    script: '.tmp/server/server.build.js',
     ext: 'js',
-    ignore: ['node_modules', 'tools', 'deploy', 'src', '.tmp/js'],
+    ignore: [],
     execMap: {
       js: "node --harmony"
     },
@@ -61,6 +61,6 @@ export default {
       PORT: 9078,
       DOMAIN: 'http://localhost:9077'
     },
-    watch: ['.tmp']
+    watch: ['.tmp/server']
   }
 };
