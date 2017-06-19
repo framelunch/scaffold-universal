@@ -9,29 +9,36 @@ import iconPng from './assets/icon.png';
 type Props = {
   name: string
 };
-
+type Data = {
+  a: boolean
+}
 type State = {
   dispText: string,
   radio: string,
-  data: {
-    a: boolean
-  }
+  data: Data
 };
 
-export default class MainVisual extends React.Component {
-  props: Props;
-  state: State;
+export default class MainVisual extends React.Component<Props, Props, State> {
+  state: State; // Stateは親クラスが定義してないからここで宣言
+  elm: HTMLElement;
   onChangeInput: (e: Event) => void;
   onChangeCheckbox: (e: Event) => void;
   onChangeRadio: (e: Event) => void;
 
+  static defaultProps = {
+    name: 'test',
+  }
+
   // サーバでメモリリークの原因になるため、こう書くのがよいとのこと
   // https://developers.cyberagent.co.jp/blog/archives/3513/
+  // FIXME: flowtypeのエラーを解決できなかった
+  /*
   static get defaultProps(): Props {
     return {
       name: 'test',
     };
   }
+  */
 
   constructor(props: Props) {
     super(props);
@@ -52,32 +59,29 @@ export default class MainVisual extends React.Component {
     console.log(findDOMNode(this));
   }
 
-  onChangeInput({ currentTarget }: Event) {
-    if (currentTarget instanceof HTMLInputElement) {
-      this.setState(Object.assign({}, this.state, { dispText: currentTarget.value }));
-    }
+  onChangeInput(e: Event & {target: HTMLInputElement}) {
+    const target = e.target;
+    this.setState(Object.assign({}, this.state, { dispText: target.value }));
   }
 
-  onChangeCheckbox({ target }: Event) {
-    if (target instanceof HTMLInputElement) {
-      const { name, checked } = target;
-      this.setState(Object.assign({}, this.state, {
-        data: Object.assign({}, this.state.data, {
-          [name]: checked,
-        }),
-      }));
-    }
+  onChangeCheckbox(e: Event & {target: HTMLInputElement}) {
+    const target = e.target;
+
+    this.setState(Object.assign({}, this.state, {
+      data: Object.assign({}, this.state.data, {
+        [target.name]: target.checked,
+      }),
+    }));
   }
 
-  onChangeRadio({ target }: Event) {
-    if (target instanceof HTMLInputElement) {
-      this.setState(Object.assign({}, this.state, { radio: target.value }));
-    }
+  onChangeRadio(e: Event & {target: HTMLInputElement}) {
+    const target = e.target;
+    this.setState(Object.assign({}, this.state, { radio: target.value }));
   }
 
   render() {
     return (
-      <div className={style.MainVisual}>
+      <div className={style.MainVisual} ref={elm => (this.elm = elm)}>
         <input
           type="text"
           value={this.state.dispText}

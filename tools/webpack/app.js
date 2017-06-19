@@ -45,6 +45,7 @@ const base = {
               'flow'
             ],
             plugins: [
+              'transform-class-properties',
               'transform-object-rest-spread'
             ],
             cacheDirectory: true,

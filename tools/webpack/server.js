@@ -37,6 +37,7 @@ const base = {
             ],
             plugins: [
               'transform-object-rest-spread',
+              'transform-class-properties',
               [
                 "css-modules-transform",
                 {
