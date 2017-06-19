@@ -1,6 +1,5 @@
 import React from 'react';
 import { findDOMNode } from 'react-dom';
-import PropTypes from 'prop-types';
 
 import style from './MainVisual.css';
 import clickSvg from './assets/click.svg';
@@ -52,7 +51,7 @@ export default class MainVisual extends React.Component {
 
   render() {
     return (
-      <div className={style.header}>
+      <div className={style.MainVisual}>
         <input
           type="text"
           value={this.state.dispText}
@@ -81,14 +80,10 @@ export default class MainVisual extends React.Component {
 
         <p>{this.props.name}</p>
         <p>2016 - {new Date().getFullYear()}</p>
-        <img src={clickSvg} alt="test" width={50} />
+
         <img src={iconPng} alt="test" width={50} />
+        <img src={clickSvg} alt="test" width={50} />
       </div>
     );
   }
 }
-
-MainVisual.propTypes = {
-  name: PropTypes.string.isRequired,
-};
-

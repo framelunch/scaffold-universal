@@ -11,14 +11,14 @@ export default {
 
   view: {
     src: ['src/views/**/*.ejs', '!src/views/**/_*'],
-    watch: ['src/views/**/*.ejs', 'src/modules/**/*.ejs'],
+    watch: ['src/views/**/*.ejs'],
     rename(path) {
       if (path.basename !== 'index') {
         let basename = 'index';
         let dirname = `${path.dirname}/`;
 
         dirname += path.basename.split('.').reduce((str, item) => {
-          if (item.charAt(0) === '_') {
+          if (item.charAt(0) === '$') {
             basename = item.substr(1);
           } else {
             str += `${item}/`;
@@ -34,22 +34,33 @@ export default {
 
   style: {
     src: ['src/styles/**/*.css', '!src/styles/**/_*'],
-    watch: ['src/styles/**/*.css', 'src/modules/**/*.css']
+    watch: ['src/styles/**/*.css']
   },
 
   script: {
     src: ['src/scripts/**/*.{js,jsx}', '!src/scripts/**/_*'],
-    watch: ['src/scripts/**/*', 'src/components/**/*', 'src/modules/**/*.{js,jsx}']
+    watch: ['src/**/*.{js,jsx}']
   },
 
   browser: {
+    proxy: 'http://localhost:9078',
+    port: 9077,
     notify: false,
-    port: 9012,
-    server: {
-      baseDir: ['.tmp'],
-      routes: {
-        '/assets': 'src/assets'
-      },
-    },
+    reloadDebounce: 500
   },
+
+  nodemon: {
+    script: '.tmp/server/server.build.js',
+    ext: 'js',
+    ignore: [],
+    execMap: {
+      js: "node --harmony"
+    },
+    env: {
+      NODE_ENV: 'development',
+      PORT: 9078,
+      DOMAIN: 'http://localhost:9077'
+    },
+    watch: ['.tmp/server']
+  }
 };

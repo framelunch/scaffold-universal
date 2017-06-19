@@ -46,7 +46,7 @@ gulp.task('b.style', () => (
       nested,
       flexbugsFixes,
       nthChildFix,
-      autoprefixer,
+      autoprefixer({ browsers: browserslist }),
       cssnano,
     ]))
     .pipe(gulp.dest(`${conf.dest.build}/css`))

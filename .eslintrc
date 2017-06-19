@@ -8,9 +8,24 @@
     "browser": true
   },
   "rules": {
-    "no-param-reassign": "off", // 同じ関数内で戻り値を返すreturnと返さないreturnがあったら怒る 無効化 serverで困る
-    "one-var": "off", // 1行につき1宣言 無効化 FLの流儀と合わない
-    "eqeqeq": ["error", "always"], // 比較演算子はすべて===か!==
+    // 同じ関数内で戻り値を返すreturnと返さないreturnがあったら怒る 無効化 serverで困る
+    "no-param-reassign": "off",
+    // 同じ関数内で戻り値を返すreturnと返さないreturnがあったら怒る 無効化 serverで困る
+    "consistent-return": "off",
+    // 1行につき1宣言 無効化 FLの流儀と合わない
+    "one-var": "off",
+    // 比較演算子はすべて===か!==
+    "eqeqeq": ["error", "always"],
+    // underscore開始の変数やプロパティを禁止する 無効化 思うところあって。
+    "no-underscore-dangle": "off",
+    // 1行あたりの最大文字数 120 ただしURLとかコメントとか改行で区切りづらいネタは見逃す
+    "max-len": ["error", 120, 2, {
+      "ignoreUrls": true,
+      "ignoreComments": true,
+      "ignoreRegExpLiterals": true,
+      "ignoreStrings": true,
+      "ignoreTemplateLiterals": true
+    }]
 
     /*
     "import/no-extraneous-dependencies": ["error", {

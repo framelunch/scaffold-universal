@@ -4,7 +4,7 @@ import looptime from './looptime';
 const cp = Cp();
 let id;
 
-export const addToLoop = (func) => {
+export function addToLoop(func) {
   cp.add(func);
   if (!id) {
     id = setInterval(() => { cp.update(); }, looptime);
@@ -12,7 +12,7 @@ export const addToLoop = (func) => {
   return func;
 };
 
-export const removeFromLoop = (func) => {
+export function removeFromLoop(func) {
   cp.remove(func);
   if (!cp.length) {
     clearInterval(id);

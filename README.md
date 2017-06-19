@@ -47,13 +47,28 @@
 .
 |- /build/                  # yarn run buildコマンドで生成されるコンパイル済みファイル
 |- /src
-|    |- /assets/            # フロントエンドに必要な静的リソース
-|    |- /components/        # Reactによるコンポーネント
+|    |- /api/               # REST API
+|    |- /app/               # ReactによるSPAモジュール
+|         |- /actions
+|         |- /components
+|         |- /modules
+|         |- /reducers
+|         |- /stores
+|         |- Routes.jsx     # Reactによるルーティング
+|    |- /assets/            # 画像など静的リソース
+|    |- /auth/              # 認証系のAPI
+|    |- /config             # where we do the bulk of our apps configuration
+|         |- /environment/  # configuration specific to the node environment
+|         |- /express.js    # setting for express framework
 |    |- /libs/              # Javascriptのライブラリ
-|    |- /modules/           # 
 |    |- /scripts/           # Javascriptのエントリーディレクトリ
 |    |- /styles/            # CSSのエントリーディレクトリ
 |    |- /views/             # EJSのエントリーディレクトリ
+|    |- favicon.ico
+|    |- server.js           # initialize app
+|    |- routers.jsx         # URL routing
+|    |- robots.txt
+|    |- sitemap.xml
 |- /node_modules/           # 3rd-party libraries and utilities for nodeJs
 |- /tools/                  # ビルドツール関連
 |    |- /gulp/              # gulpタスクを記述したjs。タスクごとに1ファイルとする
