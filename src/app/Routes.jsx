@@ -5,6 +5,7 @@ import {
   Link,
   Redirect,
 } from 'react-router-dom';
+
 import MainVisual from './components/MainVisual/MainVisual';
 
 const RedirectWithStatus = ({ from, to, status }) => (
