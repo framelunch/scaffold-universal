@@ -53,6 +53,8 @@ export default class MainVisual extends React.Component<Props, Props, State> {
     this.onChangeInput = this.onChangeInput.bind(this);
     this.onChangeCheckbox = this.onChangeCheckbox.bind(this);
     this.onChangeRadio = this.onChangeRadio.bind(this);
+
+    console.log(process.env.NODE_ENV);
   }
 
   componentDidMount() {

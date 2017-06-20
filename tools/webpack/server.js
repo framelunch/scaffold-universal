@@ -15,7 +15,8 @@ const externals = (() => {
 const base = {
   entry: path.join(__dirname, '../../src/server'),
   output: {
-    filename: 'server/server.build.js'
+    filename: 'server/server.build.js',
+    sourceMapFilename: 'server/server.build.map'
   },
   target: 'node',
   resolve: {
@@ -66,7 +67,7 @@ const base = {
 
 export const development = Object.assign({}, base, {
   cache: true,
-  devtool: 'inline-source-map',
+  devtool: 'source-map'
 });
 
 export const production = Object.assign({}, base, {

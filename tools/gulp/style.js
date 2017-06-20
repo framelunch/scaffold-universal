@@ -11,7 +11,6 @@ import nthChildFix from 'postcss-nth-child-fix';
 import url from 'postcss-url';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
-import browser from 'browser-sync';
 
 import conf from '../config';
 
@@ -34,7 +33,6 @@ gulp.task('style', () => (
       autoprefixer,
     ]))
     .pipe(gulp.dest(`${conf.dest.dev}/css`))
-    .pipe(browser.reload({stream: true}))
 ));
 
 gulp.task('b.style', () => (

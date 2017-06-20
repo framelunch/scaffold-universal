@@ -23,7 +23,10 @@ export default (app) => {
           <Routes />
         </StaticRouter>);
 
-      return res.render('_app', { component, appState: JSON.stringify({ data: 'testtesttest', a: 22 }) });
+      return res.render('_app', {
+        component,
+        appState: JSON.stringify({ data: 'testtesttest', a: 22 }),
+      });
     })
     .all(errors[404]);
 

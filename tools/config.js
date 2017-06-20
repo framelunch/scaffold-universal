@@ -39,7 +39,14 @@ export default {
 
   script: {
     src: ['src/scripts/**/*.{js,jsx}', '!src/scripts/**/_*'],
-    watch: ['src/**/*']
+    watch: {
+      app: [
+        'src/*.{js,jsx}',
+        'src/api/**/*', 'src/app/**/*', 'src/auth/**/*', 'src/config/**/*',
+        'src/libs/**/*', 'src/models/**/*'
+      ],
+      script: ['src/scripts/**/*']
+    }
   },
 
   browser: {

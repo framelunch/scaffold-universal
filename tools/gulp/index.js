@@ -52,7 +52,8 @@ gulp.task('dev', cb => (
 gulp.task('default', ['dev'], () => {
   gulp.watch(conf.view.watch, ['view']);
   gulp.watch(conf.style.watch, ['style']);
-  gulp.watch(conf.script.watch, ['script', 'script.app', 'script.server']);
+  gulp.watch(conf.script.watch.script, ['script']);
+  gulp.watch(conf.script.watch.app, ['script.app', 'script.server']);
 });
 
 gulp.task('build', function (cb) {

@@ -2,7 +2,6 @@ import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 import webpack from 'webpack';
 import webpackStream from 'webpack-stream';
-import browser from 'browser-sync';
 import conf from '../config';
 
 import * as confScript from '../webpack/script';
@@ -13,7 +12,6 @@ gulp.task('script', () => (
   plumber()
     .pipe(webpackStream(confScript.development, webpack))
     .pipe(gulp.dest(`${conf.dest.dev}`))
-    .pipe(browser.reload({stream: true}))
 ));
 gulp.task('script.app', () => (
   plumber()

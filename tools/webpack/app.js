@@ -1,5 +1,6 @@
 import webpack from 'webpack';
 import customProperties from 'postcss-custom-properties';
+import customMedia from 'postcss-custom-media';
 import nested from 'postcss-nested';
 import importCss from 'postcss-import';
 import autoprefixer from 'autoprefixer';
@@ -27,6 +28,9 @@ const base = {
       'node_modules',
     ],
     extensions: ['.jsx', '.js'],
+  },
+  node: {
+    process: false,
   },
   module: {
     rules: [
@@ -70,9 +74,10 @@ const base = {
               loader: 'postcss-loader',
               options: {
                 plugins: (loader) => [
-                  customProperties,
-                  nested,
                   importCss({root: loader.resourcePath}),
+                  customProperties,
+                  customMedia,
+                  nested,
                   autoprefixer
                 ]
               }
@@ -96,6 +101,7 @@ const base = {
 export const development = Object.assign({}, base, {
   cache: true,
   devtool: 'inline-source-map',
+
   plugins: [
     new webpack.LoaderOptionsPlugin({ debug: true }),
     new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'js/vendor.app.js' }),
