@@ -8,18 +8,18 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import UglifyJs from 'uglifyjs-webpack-plugin';
 import { browserslist } from '../../package.json';
 
+const entry = {
+  vendor: [
+    'react',
+    'react-dom',
+    'react-redux',
+    'react-router-dom',
+    'redux'
+  ],
+  app: './src/app/app.jsx'
+};
+
 const base = {
-  entry: {
-    vendor: [
-      'babel-polyfill',
-      'react',
-      'react-dom',
-      'react-redux',
-      'react-router-dom',
-      'redux'
-    ],
-    app: './src/app/app.jsx'
-  },
   output: {
     filename: 'js/[name].js'
   },
@@ -99,6 +99,7 @@ const base = {
 };
 
 export const development = Object.assign({}, base, {
+  entry,
   cache: true,
   devtool: 'inline-source-map',
 
@@ -113,7 +114,15 @@ export const development = Object.assign({}, base, {
 });
 
 export const production = Object.assign({}, base, {
+  entry: ((_entry) => {
+    const newEntry = Object.assign({}, _entry);
+    newEntry.vendor = (_entry.vendor || []).concat([
+      'babel-polyfill'
+    ]);
+    return newEntry;
+  })(entry),
   cache: false,
+
   plugins: [
     new webpack.LoaderOptionsPlugin({ debug: false }),
     new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'js/vendor.app.js' }),

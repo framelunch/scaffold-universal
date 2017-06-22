@@ -4,11 +4,7 @@ import webpack from 'webpack';
 import UglifyJs from 'uglifyjs-webpack-plugin';
 import conf from '../config';
 
-const entry = {
-  vendor: [
-    'babel-polyfill',
-  ],
-};
+const entry = {};
 
 globby.sync(conf.script.src)
   .forEach((filename) => {
@@ -17,7 +13,6 @@ globby.sync(conf.script.src)
   });
 
 const base = {
-  entry,
   output: {
     filename: 'js/[name].js'
   },
@@ -44,6 +39,7 @@ const base = {
 };
 
 export const development = Object.assign({}, base, {
+  entry,
   cache: true,
   devtool: 'inline-source-map',
   plugins: [
@@ -53,6 +49,11 @@ export const development = Object.assign({}, base, {
 });
 
 export const production = Object.assign({}, base, {
+  entry: ((_entry) => {
+    const newEntry = Object.assign({}, _entry);
+    newEntry.vendor = (_entry.vendor || []).concat(['babel-polyfill']);
+    return newEntry;
+  })(entry),
   cache: false,
   devtool: '',
   plugins: [

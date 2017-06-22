@@ -23,6 +23,7 @@
     "gulp:view": "NODE_ENV=development gulp view",
     "gulp:style": "NODE_ENV=development gulp style",
     "gulp:script": "NODE_ENV=development gulp script",
+    "gulp:app": "NODE_ENV=development gulp script.app",
     "gulp:server": "NODE_ENV=development gulp script.server",
     "lint": "run-p lint:*",
     "lint:style": "stylelint 'src/**/*.css'",
