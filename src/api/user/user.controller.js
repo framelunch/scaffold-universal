@@ -1,5 +1,6 @@
 import User from '../../models/User';
 import { signToken } from '../../auth/auth.service';
+import { activate } from '../../components/mail';
 import optimizeQuery from '../../libs/utils/optimizeQuery';
 
 function _getID({ params, user }) {
@@ -37,7 +38,7 @@ export function getUsers(req, res) {
     .exec((err, users) => {
       if (err) return res.status(500).send(err);
 
-      res.json(_.reduce(users, (docs, u) => {
+      res.json(users.reduce((docs, u) => {
         if (u.ranking) u.ranking = u.ranking.slice(0, 1);
         delete u.salt;
         delete u.hashedPassword;
@@ -57,7 +58,7 @@ export function createUser(req, res) {
     req.body.token = signToken(user._id);
     res.sendStatus(200);
 
-    // mail.activate(req.body);
+    activate(req.body);
   });
 }
 

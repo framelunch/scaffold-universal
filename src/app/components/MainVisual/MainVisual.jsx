@@ -1,7 +1,5 @@
 // @flow
 import React from 'react';
-import { findDOMNode } from 'react-dom';
-
 import style from './MainVisual.css';
 import clickSvg from './assets/click.svg';
 import iconPng from './assets/icon.png';
@@ -58,7 +56,7 @@ export default class MainVisual extends React.Component<Props, Props, State> {
   }
 
   componentDidMount() {
-    console.log(findDOMNode(this));
+    console.log(this.elm);
   }
 
   onChangeInput(e: Event & {target: HTMLInputElement}) {

@@ -1,3 +1,8 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
+const { PORT } = process.env;
+
 export default {
   dest: {
     dev: '.tmp',
@@ -50,7 +55,7 @@ export default {
   },
 
   browser: {
-    proxy: 'http://localhost:9078',
+    proxy: `http://localhost:${PORT}`,
     port: 9077,
     notify: false,
     reloadDebounce: 500
@@ -62,11 +67,6 @@ export default {
     ignore: [],
     execMap: {
       js: "node --harmony"
-    },
-    env: {
-      NODE_ENV: 'development',
-      PORT: 9078,
-      DOMAIN: 'http://localhost:9077'
     },
     watch: ['.tmp/server']
   }

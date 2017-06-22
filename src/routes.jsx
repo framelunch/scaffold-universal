@@ -1,9 +1,9 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
-import Routes from './app/routes';
+import Routes from './app/Routes';
 
-import errors from './errors';
+import errors from './components/errors';
 import user from './api/user';
 import auth from './auth';
 

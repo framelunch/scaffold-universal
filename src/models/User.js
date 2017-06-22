@@ -25,7 +25,7 @@ const UserSchema = new Schema({
  */
 UserSchema
   .virtual('password')
-  .set((password) => {
+  .set(function (password) {
     this._password = password;
     this.salt = this.makeSalt();
     this.hashedPassword = this.encryptPassword(password);
@@ -34,18 +34,22 @@ UserSchema
 
 UserSchema
   .virtual('me')
-  .get(() => ({
-    _id: this._id,
-    name: this.name,
-    role: this.role,
-  }));
+  .get(function () {
+    return {
+      _id: this._id,
+      name: this.name,
+      role: this.role,
+    };
+  });
 
 UserSchema
   .virtual('token')
-  .get(() => ({
-    _id: this._id,
-    role: this.role,
-  }));
+  .get(function () {
+    return {
+      _id: this._id,
+      role: this.role,
+    };
+  });
 
 /**
  * Validations
@@ -54,14 +58,14 @@ UserSchema
 // Validate empty name
 UserSchema
   .path('name')
-  .validate((name) => {
+  .validate(function (name) {
     if (authTypes.indexOf(this.provider) !== -1) return true;
     return name.length;
   }, 'Name cannot be blank');
 
 UserSchema
   .path('email')
-  .validate((email) => {
+  .validate(function (email) {
     if (authTypes.indexOf(this.provider) !== -1) return true;
     return email.length;
   }, 'Email cannot be blank');
@@ -71,7 +75,7 @@ UserSchema
   .path('email')
   .validate({
     isAsync: true,
-    validator(value, respond) {
+    validator (value, respond) {
       const self = this;
       this.constructor.findOne({ email: value }, (err, user) => {
         if (err) throw err;
@@ -88,7 +92,7 @@ UserSchema
 // Validate empty password
 UserSchema
   .path('hashedPassword')
-  .validate((hashedPassword) => {
+  .validate(function (hashedPassword) {
     if (authTypes.indexOf(this.provider) !== -1) return true;
     return hashedPassword.length;
   }, 'Password cannot be blank');
@@ -99,7 +103,7 @@ const validatePresenceOf = value => value && value.length;
  * Pre-save hook
  */
 UserSchema
-  .pre('save', (next) => {
+  .pre('save', function (next) {
     if (!this.isNew) {
       next();
     } else if (!validatePresenceOf(this.hashedPassword) && authTypes.indexOf(this.provider) === -1) {
