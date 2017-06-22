@@ -1,10 +1,9 @@
 import path from 'path';
-import _ from 'lodash';
 
 const root = path.join(process.cwd(), 'src');
 const { DOMAIN, MONGODB_URI } = process.env;
 
-const base = {
+export default {
   root,
   userRoles: ['guest', 'user', 'admin'], // 配列の順番で権限の序列がある
 
@@ -40,15 +39,3 @@ const base = {
     callbackURL: `${DOMAIN}/auth/google/callback`,
   },
 };
-
-const configs = {
-  development: {
-    session: {
-      expire: 60 * 60 * 24,
-    },
-  },
-  test: {},
-  production: {},
-};
-
-export default _.merge(base, configs.development);

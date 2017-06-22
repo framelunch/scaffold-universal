@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import Http from 'http';
 
 import seed from './config/seed';
-import config from './config/environment';
+import config from './config';
 import configExpress from './config/express';
 import configRoutes from './routes';
 
