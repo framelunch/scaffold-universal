@@ -29,9 +29,22 @@
     "lint:style": "stylelint 'src/**/*.css'",
     "lint:script": "eslint --ext .js,.jsx src/",
     "flow": "flow",
-    "flow-typed": "flow-typed"
+    "flow-typed": "flow-typed",
+    "test": "NODE_ENV=test ava",
+    "test:watch": "npm t -- -w"
   },
   "private": true,
+  "ava": {
+    "files": [
+      "test/**/*.test.{js,jsx}"
+    ],
+    "verbose": true,
+    "babel": "inherit",
+    "require": [
+      "babel-register",
+      "babel-polyfill"
+    ]
+  },
   "dependencies": {
     "body-parser": "^1.17.2",
     "composable-middleware": "^0.3.0",
@@ -59,6 +72,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^7.1.1",
+    "ava": "^0.19.1",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.25.0",
     "babel-eslint": "^7.2.3",
@@ -95,6 +109,7 @@
     "gulp-prettify": "^0.5.0",
     "gulp-rename": "^1.2.2",
     "gulp-sourcemaps": "^2.6.0",
+    "mockgoose": "^7.3.3",
     "npm-run-all": "^4.0.2",
     "postcss-custom-media": "^6.0.0",
     "postcss-custom-properties": "^6.0.1",

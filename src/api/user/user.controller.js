@@ -67,7 +67,7 @@ export function activateUser(req, res, next) {
     res.sendStatus(200);
   } else {
     req.user.emailActivate = true;
-    req.user.save((err) => {
+    req.user.save(err => {
       if (err) return next(err);
       res.sendStatus(200);
     });

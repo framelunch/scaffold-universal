@@ -7,7 +7,7 @@ import errors from './components/errors';
 import user from './api/user';
 import auth from './auth';
 
-export default (app) => {
+export default app => {
   app.use('/api/users', user);
   app.use('/auth', auth);
 
