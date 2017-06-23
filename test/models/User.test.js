@@ -23,7 +23,7 @@ test('create - nameが20文字以上', async t => {
   await t.notThrows(User.create(initUserData({ name: '1234567890123456789' })));
 });
 
-test('create - passwordが8文字以下', async t => {
+test('create - passwordが8文字未満', async t => {
   await t.throws(User.create(initUserData({ password: '1234567' })));
   await t.notThrows(User.create(initUserData({ password: '12345678' })));
   await t.notThrows(User.create(initUserData({ password: '123456789' })));
