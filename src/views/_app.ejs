@@ -14,7 +14,7 @@ const conf = {
     // 環境変数のUniversal
     window.process = {
       env: {
-        NODE_ENV: '<%-process.env.NODE_ENV%>'
+        NODE_ENV: '<%- process.env.NODE_ENV %>'
       }
     };
 

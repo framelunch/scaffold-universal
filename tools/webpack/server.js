@@ -14,7 +14,10 @@ const externals = (() => {
 })();
 
 const base = {
-  entry: path.join(__dirname, '../../src/server'),
+  entry: [
+    'babel-polyfill',
+    path.join(__dirname, '..', '..', 'src', 'server'),
+  ],
   output: {
     filename: 'server/server.build.js',
     sourceMapFilename: 'server/server.build.map'
