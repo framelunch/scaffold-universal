@@ -6,9 +6,8 @@ import { store, actions } from './Store';
 
 const initialState = JSON.parse(document.querySelector('#initial-data').dataset.json);
 
-
 ReactDOM.render((
   <BrowserRouter>
-    <Routes />
+    <Routes {...initialState} />
   </BrowserRouter>
 ), document.getElementById('app'));
