@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import webpack from 'webpack';
 import UglifyJs from 'uglifyjs-webpack-plugin';
 
 const externals = (() => {
@@ -67,6 +68,9 @@ const base = {
 
 export const development = Object.assign({}, base, {
   cache: true,
+  plugins: [
+    new webpack.BannerPlugin({ banner: 'require("source-map-support").install();', raw: true, entryOnly: false })
+  ],
   devtool: 'source-map'
 });
 
