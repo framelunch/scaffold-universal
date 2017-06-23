@@ -59,7 +59,7 @@ UserSchema
   .validate(function (email) {
     if (authTypes.indexOf(this.provider) !== -1) return true;
     return email.length && validateEmail(email);
-  }, 'Email cannot be blank');
+  }, 'Invalid email');
 
 // Validate email is not taken
 UserSchema
@@ -95,7 +95,7 @@ const validatePresenceOf = value => value && value.length;
  */
 UserSchema
   .pre('save', function (next) {
-    if (authTypes.indexOf(this.provider) === -1 && this.password.length < 8) {
+    if (authTypes.indexOf(this.provider) === -1 && this.password && this.password.length < 8) {
       next(new Error('Invalid password'));
     } else {
       next();
