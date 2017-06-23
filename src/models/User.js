@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import crypto from 'crypto';
+import { validateEmail } from '../libs/utils/validation';
 
 const Schema = mongoose.Schema;
 const authTypes = ['twitter', 'facebook', 'google'];
@@ -30,17 +31,7 @@ UserSchema
     this.salt = this.makeSalt();
     this.hashedPassword = this.encryptPassword(password);
   })
-  .get(() => this._password);
-
-UserSchema
-  .virtual('me')
-  .get(function () {
-    return {
-      _id: this._id,
-      name: this.name,
-      role: this.role,
-    };
-  });
+  .get(function () { return this._password; });
 
 UserSchema
   .virtual('token')
@@ -67,7 +58,7 @@ UserSchema
   .path('email')
   .validate(function (email) {
     if (authTypes.indexOf(this.provider) !== -1) return true;
-    return email.length;
+    return email.length && validateEmail(email);
   }, 'Email cannot be blank');
 
 // Validate email is not taken
@@ -75,7 +66,7 @@ UserSchema
   .path('email')
   .validate({
     isAsync: true,
-    validator (value, respond) {
+    validator(value, respond) {
       const self = this;
       this.constructor.findOne({ email: value }, (err, user) => {
         if (err) throw err;
@@ -104,9 +95,7 @@ const validatePresenceOf = value => value && value.length;
  */
 UserSchema
   .pre('save', function (next) {
-    if (!this.isNew) {
-      next();
-    } else if (!validatePresenceOf(this.hashedPassword) && authTypes.indexOf(this.provider) === -1) {
+    if (authTypes.indexOf(this.provider) === -1 && this.password.length < 8) {
       next(new Error('Invalid password'));
     } else {
       next();

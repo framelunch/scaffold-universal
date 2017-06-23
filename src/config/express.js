@@ -11,7 +11,7 @@ import config from './index';
 const { NODE_ENV } = process.env;
 const { root } = config;
 
-export default (app) => {
+export default app => {
   app.set('view engine', 'ejs');
   app.set('views', path.join(root, 'views'));
 

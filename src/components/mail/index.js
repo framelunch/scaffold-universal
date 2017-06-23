@@ -13,7 +13,7 @@ const transport = createTransport({
 });
 
 export function activate(body) {
-  transport.sendMail(Activate(body), (err) => {
+  transport.sendMail(Activate(body), err => {
     if (err) {
       console.log(err);
     }
@@ -21,7 +21,7 @@ export function activate(body) {
 }
 
 export function forgotPwd(body) {
-  transport.sendMail(ForgotPass(body), (err) => {
+  transport.sendMail(ForgotPass(body), err => {
     if (err) {
       console.log(err);
     }
@@ -29,7 +29,7 @@ export function forgotPwd(body) {
 }
 
 export function changeEmail(body) {
-  transport.sendMail(ChangeEmail(body), (err) => {
+  transport.sendMail(ChangeEmail(body), err => {
     if (err) {
       console.log(err);
     }
