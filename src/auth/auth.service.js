@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import expressJwt from 'express-jwt';
 import compose from 'composable-middleware';
 import User from '../models/User';
-import config from '../config/environment';
+import config from '../config';
 
 const validateJwt = expressJwt({ secret: config.session.secrets });
 

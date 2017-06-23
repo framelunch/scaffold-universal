@@ -6,9 +6,10 @@ import bodyParser from 'body-parser';
 import methodOverride from 'method-override';
 import cookieParser from 'cookie-parser';
 import path from 'path';
-import config from './environment';
+import config from './index';
 
-const { root, env } = config;
+const { NODE_ENV } = process.env;
+const { root } = config;
 
 export default (app) => {
   app.set('view engine', 'ejs');
@@ -23,7 +24,7 @@ export default (app) => {
   app.use(express.static(path.join(root, 'assets')));
   app.use(favicon(path.join(root, 'favicon.ico')));
 
-  if (env === 'production') {
+  if (NODE_ENV === 'production') {
     app.use(morgan('combined'));
   } else {
     app.use(express.static('.tmp'));

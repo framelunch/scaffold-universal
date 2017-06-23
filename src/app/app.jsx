@@ -6,12 +6,6 @@ import { store, actions } from './Store';
 
 const initialState = JSON.parse(document.querySelector('#initial-data').dataset.json);
 
-store.subscribe(() => {
-  console.log(store.getState());
-});
-
-store.dispatch(actions.initialize(initialState));
-store.dispatch(actions.awake());
 
 ReactDOM.render((
   <BrowserRouter>

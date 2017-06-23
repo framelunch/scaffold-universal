@@ -1,7 +1,11 @@
 import { createStore } from 'redux';
 
+const initState = {
+  users: [],
+  user: {},
+};
+
 export const INITIALIZE = 'initialize';
-export const AWAKE = 'awake';
 
 export const actions = {
   initialize(data) {
@@ -10,22 +14,15 @@ export const actions = {
       data,
     };
   },
-  awake() {
-    return {
-      type: AWAKE,
-    };
-  },
 };
 
-export const reducer = (state = {}, action) => {
+export const reducer = (state = initState, action) => {
   switch (action.type) {
     case INITIALIZE:
-      return Object.assign({}, state, action.data);
-    case AWAKE:
       return Object.assign({}, state);
     default:
       return state;
   }
 };
 
-export const store = createStore(reducer, { init: 1234 });
+export const store = createStore(reducer, initState);
