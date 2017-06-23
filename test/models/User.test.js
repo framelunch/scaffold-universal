@@ -18,11 +18,15 @@ test('create - 正しいユーザー情報を登録', async t => {
 });
 
 test('create - nameが20文字以上', async t => {
-  await t.throws(User.create(initUserData({ name: 'aaaaaaaaaaaaaaaaaaaaa' })));
+  await t.throws(User.create(initUserData({ name: '123456789012345678901' })));
+  await t.notThrows(User.create(initUserData({ name: '12345678901234567890' })));
+  await t.notThrows(User.create(initUserData({ name: '1234567890123456789' })));
 });
 
 test('create - passwordが8文字以下', async t => {
-  await t.throws(User.create(initUserData({ password: 'test' })));
+  await t.throws(User.create(initUserData({ password: '1234567' })));
+  await t.notThrows(User.create(initUserData({ password: '12345678' })));
+  await t.notThrows(User.create(initUserData({ password: '123456789' })));
 });
 
 test('create - 不正なemail', async t => {
