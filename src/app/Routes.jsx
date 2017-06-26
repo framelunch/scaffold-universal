@@ -1,23 +1,18 @@
 import React from 'react';
-import {
-  Switch,
-  Route,
-  Link,
-  Redirect,
-} from 'react-router-dom';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import reducer from './reducers';
+import App from './components/App';
+
+const store = createStore(reducer, {
+  users: [
+    { id: 1, name: 'ikeda', completed: true },
+  ],
+});
 
 export default () => (
-  <div>
-    <ul>
-      <li><Link to="/">TOP</Link></li>
-      <li><Link to="/users">Users</Link></li>
-      <li><Link to="/users/594b9cb0a761f1ad5c890d65">User Detail</Link></li>
-    </ul>
-
-    <Switch>
-
-    </Switch>
-  </div>
+  <Provider store={store}>
+    <App />
+  </Provider>
 );
-
-//
