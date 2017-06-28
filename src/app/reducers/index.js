@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
+import top from './top';
 import users from './userlist';
-import visibilityFilter from './visibilityFilter';
 
 export default combineReducers({
+  top,
   users,
-  visibilityFilter,
 });

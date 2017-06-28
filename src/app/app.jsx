@@ -1,14 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import Routes from './Routes';
-import { store, actions } from './Store';
+import Routes, { getStore } from './Routes';
 
-const initialState = JSON.parse(document.querySelector('#initial-data').dataset.json);
-
+const store = getStore(JSON.parse(document.querySelector('#initial-data').dataset.json));
 
 ReactDOM.render((
   <BrowserRouter>
-    <Routes />
+    <Routes store={store} />
   </BrowserRouter>
 ), document.getElementById('app'));

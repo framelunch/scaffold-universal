@@ -1,18 +1,13 @@
-export default (state = [], action) => {
+export default (state = {}, action) => {
   switch (action.type) {
-    case 'ADD_USER':
-      return [
-        ...state,
-        {
-          id: action.id,
-          text: action.text,
-          completed: false,
-        },
-      ]
-    case 'TOGGLE_USER':
-      return state.map(user => (
-         user.id === action.id ? { ...user, completed: !user.completed } : user
-      ));
+    case 'ADD_USERS':
+      return {
+        isFetched: true,
+        data: [
+          ...state.data,
+          ...action.users,
+        ],
+      };
     default:
       return state;
   }

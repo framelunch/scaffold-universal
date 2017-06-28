@@ -1,18 +1,35 @@
 import React from 'react';
-import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { Switch, Route, Link } from 'react-router-dom';
+import { createStore, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
 import reducer from './reducers';
-import App from './components/App';
 
-const store = createStore(reducer, {
-  users: [
-    { id: 1, name: 'ikeda', completed: true },
-  ],
-});
+import CTop from './containers/CTop';
+import CUsers from './containers/CUsers';
 
-export default () => (
+export const getRoutes = () => ([
+  { key: 'top', path: '/', component: CTop, exact: true },
+  { key: 'users', path: '/users', component: CUsers },
+]);
+export const getStore = initialState => (
+  createStore(
+    reducer,
+    initialState,
+    applyMiddleware(thunkMiddleware),
+  )
+);
+
+export default ({store}) => (
   <Provider store={store}>
-    <App />
+    <div>
+      <ul>
+        <li><Link to="/">Top</Link></li>
+        <li><Link to="/users">User List</Link></li>
+      </ul>
+      <Switch>
+        {getRoutes().map((item, i) => <Route {...item} />)}
+      </Switch>
+    </div>
   </Provider>
 );
