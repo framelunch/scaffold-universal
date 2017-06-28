@@ -2,8 +2,9 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { Switch, Route, Link } from 'react-router-dom';
 import { createStore, applyMiddleware } from 'redux';
-import thunkMiddleware from 'redux-thunk';
+import { createEpicMiddleware } from 'redux-observable';
 import reducer from './reducers';
+import epics from './epics';
 
 import CTop from './containers/CTop';
 import CUsers from './containers/CUsers';
@@ -19,7 +20,7 @@ export default class Routes extends React.Component {
     this.store = createStore(
       reducer,
       props.initialState,
-      applyMiddleware(thunkMiddleware),
+      applyMiddleware(createEpicMiddleware(epics)),
     );
   }
   render() {

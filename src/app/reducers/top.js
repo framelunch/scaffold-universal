@@ -1,5 +1,6 @@
 import { handleActions } from 'redux-actions';
+import { setTopText } from '../actions';
 
 export default handleActions({
-  SET_TOP_TEXT: (state, action) => action.payload,
+  [setTopText]: (state, action) => action.payload,
 }, 'default text');

@@ -1,22 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import 'isomorphic-fetch';
-import * as actions from '../actions';
+import { usersStartFetch } from '../actions';
+import { getUsers } from '../epics';
 
 class Users extends React.Component {
-  static fetchData({ urlHeader }) {
-    return new Promise((resolve, reject) => {
-      fetch(`${urlHeader}/api/users`)
-        .then(data => data.json())
-        .then(users => resolve(users))
-        .catch(error => reject(error));
-    });
-  }
+  static fetchData() { return getUsers(); }
 
   componentDidMount() {
     const { dispatch, isFetched } = this.props;
     if (isFetched) return;
-    dispatch(actions.addUsers(Users.fetchData));
+    dispatch(usersStartFetch());
   }
 
   render() {
