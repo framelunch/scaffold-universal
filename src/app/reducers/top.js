@@ -1,8 +1,5 @@
-export default (state = 'default text', action) => {
-  switch (action.type) {
-    case 'SET_TOP_TEXT':
-      return action.text;
-    default:
-      return state;
-  }
-};
+import { handleActions } from 'redux-actions';
+
+export default handleActions({
+  SET_TOP_TEXT: (state, action) => action.payload,
+}, 'default text');

@@ -14,7 +14,9 @@ const entry = {
     'react-dom',
     'react-redux',
     'react-router-dom',
-    'redux'
+    'redux',
+    'redux-actions',
+    'isomorphic-fetch'
   ],
   app: './src/app/app.jsx'
 };

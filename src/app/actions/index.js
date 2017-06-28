@@ -1,33 +1,24 @@
-export const REQUEST_API = 'REQUEST_API';
-export const RESPONSE_API = 'RESPONSE_API';
+import { createActions } from 'redux-actions';
 
-function requestAPI() {
-  return {
-    type: REQUEST_API,
-  };
-}
-function responseAPI(json) {
-  return {
-    type: RESPONSE_API,
-  };
-}
+const actions = createActions(
+  {
+    SET_TOP_TEXT: text => text,
+  },
+  'REQUEST_API',
+  'RESPONSE_API',
+);
+
+export default actions;
 
 export function addUsers(fetchData) {
   return dispatch => {
-    dispatch(requestAPI());
+    dispatch(actions.requestApi());
     return fetchData({ urlHeader: '' }).then(users => {
-      dispatch(responseAPI());
+      dispatch(actions.responseApi());
       dispatch({
         type: 'ADD_USERS',
-        users,
+        payload: users,
       });
     });
-  };
-}
-
-export function setTopText(text) {
-  return {
-    type: 'SET_TOP_TEXT',
-    text,
   };
 }

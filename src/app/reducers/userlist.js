@@ -1,14 +1,11 @@
-export default (state = {}, action) => {
-  switch (action.type) {
-    case 'ADD_USERS':
-      return {
-        isFetched: true,
-        data: [
-          ...state.data,
-          ...action.users,
-        ],
-      };
-    default:
-      return state;
-  }
-};
+import { handleActions } from 'redux-actions';
+
+export default handleActions({
+  ADD_USERS: (state, action) => ({
+    isFetched: true,
+    data: [
+      ...state.data,
+      ...action.payload,
+    ],
+  }),
+}, {});

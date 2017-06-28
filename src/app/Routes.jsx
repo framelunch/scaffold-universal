@@ -28,7 +28,7 @@ export default ({store}) => (
         <li><Link to="/users">User List</Link></li>
       </ul>
       <Switch>
-        {getRoutes().map((item, i) => <Route {...item} />)}
+        {getRoutes().map(item => <Route {...item} />)}
       </Switch>
     </div>
   </Provider>
