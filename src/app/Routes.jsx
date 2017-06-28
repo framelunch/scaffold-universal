@@ -12,24 +12,29 @@ export const getRoutes = () => ([
   { key: 'top', path: '/', component: CTop, exact: true },
   { key: 'users', path: '/users', component: CUsers },
 ]);
-export const getStore = initialState => (
-  createStore(
-    reducer,
-    initialState,
-    applyMiddleware(thunkMiddleware),
-  )
-);
 
-export default ({store}) => (
-  <Provider store={store}>
-    <div>
-      <ul>
-        <li><Link to="/">Top</Link></li>
-        <li><Link to="/users">User List</Link></li>
-      </ul>
-      <Switch>
-        {getRoutes().map(item => <Route {...item} />)}
-      </Switch>
-    </div>
-  </Provider>
-);
+export default class Routes extends React.Component {
+  constructor(props) {
+    super(props);
+    this.store = createStore(
+      reducer,
+      props.initialState,
+      applyMiddleware(thunkMiddleware),
+    );
+  }
+  render() {
+    return (
+      <Provider store={this.store}>
+        <div>
+          <ul>
+            <li><Link to="/">Top</Link></li>
+            <li><Link to="/users">User List</Link></li>
+          </ul>
+          <Switch>
+            {getRoutes().map(item => <Route {...item} />)}
+          </Switch>
+        </div>
+      </Provider>
+    );
+  }
+}

@@ -2,7 +2,7 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter, matchPath } from 'react-router-dom';
 
-import Routes, { getRoutes, getStore } from './app/Routes';
+import Routes, { getRoutes } from './app/Routes';
 import errors from './components/errors';
 import user from './api/user';
 import auth from './auth';
@@ -35,10 +35,9 @@ export default app => {
 
       Promise.all(fetches).then(() => {
         const context = {};
-        const store = getStore(initialState);
         const component = renderToString(
           <StaticRouter location={req.url} context={context}>
-            <Routes store={store} />
+            <Routes initialState={initialState} />
           </StaticRouter>);
 
         return res.render('_app', {
