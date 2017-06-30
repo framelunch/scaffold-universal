@@ -1,12 +1,12 @@
 import { handleActions } from 'redux-actions';
-import { usersStartFetch, usersResult } from '../actions';
+import { USERS_START_FETCH, USERS_RESULT } from '../actions';
 
 export default handleActions({
-  [usersStartFetch]: (state, action) => ({
+  [USERS_START_FETCH]: (state, action) => ({
     isFetched: false,
     data: [],
   }),
-  [usersResult]: (state, action) => ({
+  [USERS_RESULT]: (state, action) => ({
     isFetched: true,
     data: [
       ...state.data,

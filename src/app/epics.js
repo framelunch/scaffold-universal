@@ -1,6 +1,6 @@
 import 'rxjs';
 import { combineEpics } from 'redux-observable';
-import { usersStartFetch, usersResult } from './actions';
+import { USERS_START_FETCH, usersResult } from './actions';
 
 export function getUsers() {
   return fetch(`${process.env.DOMAIN}/api/users`)
@@ -8,8 +8,8 @@ export function getUsers() {
 }
 export default combineEpics(
   (action$ => (
-      action$.ofType(usersStartFetch().type)
-        .mergeMap(() => getUsers())
-        .map(result => usersResult(result)))
+    action$.ofType(USERS_START_FETCH)
+      .switchMap(() => getUsers())
+      .map(result => usersResult(result)))
   ),
 );

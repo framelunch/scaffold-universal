@@ -17,7 +17,6 @@ const entry = {
     'redux',
     'redux-actions',
     'redux-observable',
-    'rxjs',
     'isomorphic-fetch'
   ],
   app: './src/app/app.jsx'
