@@ -1,6 +1,7 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter, matchPath } from 'react-router-dom';
+import serialize from 'serialize-javascript';
 
 import Routes, { getRoutes } from './app/Routes';
 import errors from './components/errors';
@@ -42,7 +43,7 @@ export default app => {
 
         return res.render('_app', {
           component,
-          appState: JSON.stringify(initialState),
+          appState: serialize(initialState),
         });
       });
     })
