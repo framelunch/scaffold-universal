@@ -20,7 +20,7 @@ const entry = {
     'isomorphic-fetch',
     'rxjs'
   ],
-  app: './src/app/app.jsx'
+  app: './src/app/App.jsx'
 };
 
 const base = {

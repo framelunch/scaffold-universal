@@ -1,28 +1,21 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { createEpicMiddleware, combineEpics } from 'redux-observable';
 
-const initState = {
-  users: [],
-  user: {},
-};
+import * as top from './containers/top';
+import * as user from './containers/users';
 
-export const INITIALIZE = 'initialize';
+const epics = combineEpics(
+  ...user.epics,
+);
+const reducer = combineReducers({
+  top: top.reducers,
+  users: user.reducers,
+});
 
-export const actions = {
-  initialize(data) {
-    return {
-      type: INITIALIZE,
-      data,
-    };
-  },
-};
-
-export const reducer = (state = initState, action) => {
-  switch (action.type) {
-    case INITIALIZE:
-      return Object.assign({}, state);
-    default:
-      return state;
-  }
-};
-
-export const store = createStore(reducer, initState);
+export default state => (
+  createStore(
+    reducer,
+    state,
+    applyMiddleware(createEpicMiddleware(epics)),
+  )
+);

@@ -1,8 +1,9 @@
+// @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import { setTopText } from '../actions';
+import { actions } from './index';
 
-const Top = ({top, onChangeText}) => (
+const Top = ({ top, onChangeText }: {top: string, onChangeText: Function}) => (
   <div>
     <h1>{top}</h1>
     <div>
@@ -18,10 +19,10 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: Function) {
   return {
     onChangeText(text) {
-      dispatch(setTopText(text));
+      dispatch(actions.setTopText(text));
     },
   };
 }

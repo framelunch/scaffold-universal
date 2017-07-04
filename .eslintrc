@@ -1,6 +1,7 @@
 {
   "extends": ["framelunch"],
   "rules": {
+    "object-property-newline": "off",
     // underscore開始の変数やプロパティを禁止する 無効化 思うところあって。
     "no-underscore-dangle": "off",
     // 1行あたりの最大文字数 120 ただしURLとかコメントとか改行で区切りづらいネタは見逃す

@@ -1,16 +1,19 @@
+// @flow
 import React from 'react';
 import { connect } from 'react-redux';
 import 'isomorphic-fetch';
-import { usersStartFetch } from '../actions';
-import { getUsers } from '../epics';
 
-class Users extends React.Component {
+import { getUsers } from '../../fetches';
+import { actions } from './index';
+import type { UsersState } from './index';
+
+class Users extends React.Component<void, UsersState, void> {
   static fetchData() { return getUsers(); }
 
   componentDidMount() {
     const { dispatch, isFetched } = this.props;
     if (isFetched) return;
-    dispatch(usersStartFetch());
+    if (dispatch) dispatch(actions.usersStartFetch());
   }
 
   render() {
