@@ -1,4 +1,3 @@
-import 'rxjs';
 import { combineEpics } from 'redux-observable';
 import { USERS_START_FETCH, usersResult } from './actions';
 

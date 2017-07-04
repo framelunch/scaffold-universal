@@ -3,8 +3,11 @@ import globby from 'globby';
 import webpack from 'webpack';
 import UglifyJs from 'uglifyjs-webpack-plugin';
 import conf from '../config';
+import { browserslist } from '../../package.json';
 
-const entry = {};
+const entry = {
+  vendor: ['jquery', 'animejs']
+};
 
 globby.sync(conf.script.src)
   .forEach((filename) => {
@@ -30,7 +33,19 @@ const base = {
         use: {
           loader: 'babel-loader',
           options: {
+            presets: [
+              ['env', {
+                targets: { browsers: browserslist },
+                useBuiltIns: true,
+                modules: process.env.NODE_ENV === 'production' ? false : 'commonjs',
+                debug: process.env.NODE_ENV === 'development'
+              }]
+            ],
+            plugins: [
+              'transform-object-rest-spread'
+            ],
             cacheDirectory: true,
+            babelrc: false
           },
         },
       }
@@ -49,11 +64,7 @@ export const development = Object.assign({}, base, {
 });
 
 export const production = Object.assign({}, base, {
-  entry: ((_entry) => {
-    const newEntry = Object.assign({}, _entry);
-    newEntry.vendor = (_entry.vendor || []).concat(['babel-polyfill']);
-    return newEntry;
-  })(entry),
+  entry,
   cache: false,
   devtool: '',
   plugins: [

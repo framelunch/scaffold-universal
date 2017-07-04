@@ -16,6 +16,8 @@ const externals = (() => {
 const base = {
   entry: [
     'babel-polyfill',
+    'isomorphic-fetch',
+    'rxjs',
     path.join(__dirname, '../../src/server'),
   ],
   output: {

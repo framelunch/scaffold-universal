@@ -1,3 +1,6 @@
+import 'babel-polyfill';
+import $ from 'jquery';
+import anime from 'animejs';
 import notice from '../libs/notice';
 
 notice.listen('init', data => {

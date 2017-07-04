@@ -17,7 +17,8 @@ const entry = {
     'redux',
     'redux-actions',
     'redux-observable',
-    'isomorphic-fetch'
+    'isomorphic-fetch',
+    'rxjs'
   ],
   app: './src/app/app.jsx'
 };
@@ -46,6 +47,8 @@ const base = {
             presets: [
               ['env', {
                 targets: { browsers: browserslist },
+                useBuiltIns: true,
+                modules: process.env.NODE_ENV === 'production' ? false : 'commonjs',
                 debug: process.env.NODE_ENV === 'development'
               }],
               'react',
@@ -63,7 +66,6 @@ const base = {
       {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
-          //fallback: "style-loader",
           use: [
             {
               loader: 'css-loader',
@@ -117,13 +119,7 @@ export const development = Object.assign({}, base, {
 });
 
 export const production = Object.assign({}, base, {
-  entry: ((_entry) => {
-    const newEntry = Object.assign({}, _entry);
-    newEntry.vendor = (_entry.vendor || []).concat([
-      'babel-polyfill'
-    ]);
-    return newEntry;
-  })(entry),
+  entry,
   cache: false,
 
   plugins: [

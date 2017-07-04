@@ -153,6 +153,12 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
+animejs@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/animejs/-/animejs-2.0.2.tgz#6c80ee92253d9429b58b4c0be597772cd7c82d7a"
+  dependencies:
+    google-closure-compiler-js "^20170124.0.0"
+
 ansi-align@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ansi-align/-/ansi-align-2.0.0.tgz#c36aeccba563b89ceb556f3690f0b1d9e3547f7f"
@@ -4072,6 +4078,14 @@ google-auth-library@~0.10.0:
     lodash.noop "^3.0.1"
     request "^2.74.0"
 
+google-closure-compiler-js@^20170124.0.0:
+  version "20170124.0.0"
+  resolved "https://registry.yarnpkg.com/google-closure-compiler-js/-/google-closure-compiler-js-20170124.0.0.tgz#cd77291a19a4158eb41fb241688a5e523e250364"
+  dependencies:
+    gulp-util "^3.0.7"
+    minimist "^1.2.0"
+    webpack-core "^0.6.8"
+
 google-p12-pem@^0.1.0:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/google-p12-pem/-/google-p12-pem-0.1.2.tgz#33c46ab021aa734fa0332b3960a9a3ffcb2f3177"
@@ -5155,6 +5169,10 @@ jpegtran-bin@^3.0.0:
     bin-build "^2.0.0"
     bin-wrapper "^3.0.0"
     logalot "^2.0.0"
+
+jquery@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.2.1.tgz#5c4d9de652af6cd0a770154a631bba12b015c787"
 
 js-base64@^2.1.9:
   version "2.1.9"
@@ -9383,7 +9401,7 @@ watchpack@^1.3.1:
     chokidar "^1.4.3"
     graceful-fs "^4.1.2"
 
-webpack-core@~0.6.9:
+webpack-core@^0.6.8, webpack-core@~0.6.9:
   version "0.6.9"
   resolved "https://registry.yarnpkg.com/webpack-core/-/webpack-core-0.6.9.tgz#fc571588c8558da77be9efb6debdc5a3b172bdc2"
   dependencies:
