@@ -58,6 +58,7 @@ export const production = Object.assign({}, base, {
   devtool: '',
   plugins: [
     new webpack.LoaderOptionsPlugin({ debug: false }),
+    new webpack.DefinePlugin({ 'process.env.NODE_ENV': "'production'" }),
     new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'js/vendor.script.js' }),
     new UglifyJs(),
   ]

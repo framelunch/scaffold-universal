@@ -1,8 +1,8 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import { StaticRouter } from 'react-router-dom';
-import Routes from './app/Routes';
+import { StaticRouter, matchPath } from 'react-router-dom';
 
+import Routes, { getRoutes } from './app/Routes';
 import errors from './components/errors';
 import user from './api/user';
 import auth from './auth';
@@ -17,15 +17,33 @@ export default app => {
 
   app.route('/*')
     .get((req, res) => {
-      const context = {};
-      const component = renderToString(
-        <StaticRouter location={req.url} context={context}>
-          <Routes />
-        </StaticRouter>);
+      const initialState = { top: 'SSR state', users: { isFetched: false, data: [] } };
+      const routes = getRoutes();
 
-      return res.render('_app', {
-        component,
-        appState: JSON.stringify({ data: 'testtesttest', a: 22 }),
+      const fetches = routes.reduce((docs, route) => {
+        const match = matchPath(req.url, route);
+        if (match && route.component.fetchData) {
+          docs.push(route.component.fetchData({ urlHeader: process.env.DOMAIN }).then(data => (
+            new Promise(resolve => {
+              initialState[route.key] = { data, isFetched: true };
+              resolve();
+            })
+          )));
+        }
+        return docs;
+      }, []);
+
+      Promise.all(fetches).then(() => {
+        const context = {};
+        const component = renderToString(
+          <StaticRouter location={req.url} context={context}>
+            <Routes initialState={initialState} />
+          </StaticRouter>);
+
+        return res.render('_app', {
+          component,
+          appState: JSON.stringify(initialState),
+        });
       });
     })
     .all(errors[404]);

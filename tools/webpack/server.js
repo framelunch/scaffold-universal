@@ -14,7 +14,10 @@ const externals = (() => {
 })();
 
 const base = {
-  entry: path.join(__dirname, '../../src/server'),
+  entry: [
+    'babel-polyfill',
+    path.join(__dirname, '../../src/server'),
+  ],
   output: {
     filename: 'server/server.build.js',
     sourceMapFilename: 'server/server.build.map'
@@ -78,6 +81,7 @@ export const production = Object.assign({}, base, {
   cache: false,
   devtool: '',
   plugins: [
+    new webpack.DefinePlugin({ 'process.env.NODE_ENV': "'production'" }),
     new UglifyJs(),
   ]
 });

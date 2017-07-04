@@ -1,23 +1,41 @@
 import React from 'react';
-import {
-  Switch,
-  Route,
-  Link,
-  Redirect,
-} from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { Switch, Route, Link } from 'react-router-dom';
+import { createStore, applyMiddleware } from 'redux';
+import { createEpicMiddleware } from 'redux-observable';
+import reducer from './reducers';
+import epics from './epics';
 
-export default () => (
-  <div>
-    <ul>
-      <li><Link to="/">TOP</Link></li>
-      <li><Link to="/users">Users</Link></li>
-      <li><Link to="/users/594b9cb0a761f1ad5c890d65">User Detail</Link></li>
-    </ul>
+import CTop from './containers/CTop';
+import CUsers from './containers/CUsers';
 
-    <Switch>
+export const getRoutes = () => ([
+  { key: 'top', path: '/', component: CTop, exact: true },
+  { key: 'users', path: '/users', component: CUsers },
+]);
 
-    </Switch>
-  </div>
-);
-
-//
+export default class Routes extends React.Component {
+  constructor(props) {
+    super(props);
+    this.store = createStore(
+      reducer,
+      props.initialState,
+      applyMiddleware(createEpicMiddleware(epics)),
+    );
+  }
+  render() {
+    return (
+      <Provider store={this.store}>
+        <div>
+          <ul>
+            <li><Link to="/">Top</Link></li>
+            <li><Link to="/users">User List</Link></li>
+          </ul>
+          <Switch>
+            {getRoutes().map(item => <Route {...item} />)}
+          </Switch>
+        </div>
+      </Provider>
+    );
+  }
+}
