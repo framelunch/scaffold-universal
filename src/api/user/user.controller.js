@@ -1,6 +1,6 @@
 import User from '../../models/User';
 import { signToken } from '../../auth/auth.service';
-import { activate } from '../../components/mail';
+import { activate } from '../../helpers/mail';
 import optimizeQuery from '../../libs/utils/optimizeQuery';
 
 function _getID({ params, user }) {
@@ -38,7 +38,7 @@ export function getUsers(req, res) {
     .exec((err, users) => {
       if (err) return res.status(500).send(err);
 
-      res.json(users.reduce((docs, u) => {
+      return res.json(users.reduce((docs, u) => {
         if (u.ranking) u.ranking = u.ranking.slice(0, 1);
         delete u.salt;
         delete u.hashedPassword;
@@ -58,7 +58,7 @@ export function createUser(req, res) {
     req.body.token = signToken(user._id);
     res.sendStatus(200);
 
-    activate(req.body);
+    return activate(req.body);
   });
 }
 
@@ -69,7 +69,7 @@ export function activateUser(req, res, next) {
     req.user.emailActivate = true;
     req.user.save(err => {
       if (err) return next(err);
-      res.sendStatus(200);
+      return res.sendStatus(200);
     });
   }
 }
@@ -83,6 +83,6 @@ export function getUser(req, res, next) {
     if (!user) return res.sendStatus(401);
 
     user.ranking = user.ranking.slice(0, 1);
-    res.json(user);
+    return res.json(user);
   });
 }

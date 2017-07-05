@@ -4,7 +4,7 @@ export type Action = {
   payload: any,
   meta: any,
   error: boolean
-}
+};
 export type RoutesProps = {
   initialState: any
-}
+};
