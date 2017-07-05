@@ -8,6 +8,8 @@ import initStore from './helpers/init-store';
 import Top from './containers/Top';
 import Users from './containers/Users';
 
+import type { RoutesProps } from './types';
+
 export const getRoutes = () => ([
   { key: 'top', path: '/', component: Top, exact: true },
   { key: 'users', path: '/users', component: Users, routes: [
@@ -15,15 +17,11 @@ export const getRoutes = () => ([
   ] },
 ]);
 
-type Props = {
-  initialState: any
-}
-
 export default class Routes extends React.Component {
-  props: Props;
+  props: RoutesProps;
   store: any;
 
-  constructor(props: Props) {
+  constructor(props: RoutesProps) {
     super(props);
     this.store = initStore(props.initialState);
   }

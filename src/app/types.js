@@ -5,3 +5,6 @@ export type Action = {
   meta: any,
   error: boolean
 }
+export type RoutesProps = {
+  initialState: any
+}
