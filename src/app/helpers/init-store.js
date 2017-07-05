@@ -1,15 +1,15 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { createEpicMiddleware, combineEpics } from 'redux-observable';
 
-import * as top from './containers/top';
-import * as user from './containers/users';
+import * as top from '../containers/Top/constants';
+import * as user from '../containers/Users/constants';
 
 const epics = combineEpics(
   ...user.epics,
 );
 const reducer = combineReducers({
-  top: top.reducers,
-  users: user.reducers,
+  top: top.reducer,
+  users: user.reducer,
 });
 
 export default state => (

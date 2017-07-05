@@ -3,17 +3,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import 'isomorphic-fetch';
 
-import { getUsers } from '../../fetches';
-import { actions } from './index';
-import type { UsersState } from './index';
+import { getUsers } from '../../helpers/fetches';
+import { usersStartFetch } from './constants';
 
-class Users extends React.Component<void, UsersState, void> {
+import type { UsersProps } from './types';
+
+class Users extends React.Component {
+  props: UsersProps;
   static fetchData() { return getUsers(); }
 
   componentDidMount() {
     const { dispatch, isFetched } = this.props;
     if (isFetched) return;
-    if (dispatch) dispatch(actions.usersStartFetch());
+    if (dispatch) dispatch(usersStartFetch());
   }
 
   render() {
@@ -25,7 +27,7 @@ class Users extends React.Component<void, UsersState, void> {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state): UsersProps {
   return {
     ...state.users,
   };

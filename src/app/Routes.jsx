@@ -3,10 +3,10 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { Switch, Route, Link } from 'react-router-dom';
 
-import store from './store';
+import initStore from './helpers/init-store';
 
-import Top from './containers/top/Top';
-import Users from './containers/users/Users';
+import Top from './containers/Top';
+import Users from './containers/Users';
 
 export const getRoutes = () => ([
   { key: 'top', path: '/', component: Top, exact: true },
@@ -19,12 +19,13 @@ type Props = {
   initialState: any
 }
 
-export default class Routes extends React.Component<void, Props, void> {
+export default class Routes extends React.Component {
+  props: Props;
   store: any;
 
   constructor(props: Props) {
     super(props);
-    this.store = store(props.initialState);
+    this.store = initStore(props.initialState);
   }
   render() {
     return (

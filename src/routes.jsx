@@ -3,7 +3,7 @@ import { renderToString } from 'react-dom/server';
 import { StaticRouter, matchPath } from 'react-router-dom';
 import serialize from 'serialize-javascript';
 
-import Routes, { getRoutes } from './app/Routes';
+import Routes, { getRoutes } from './app/routes';
 import errors from './components/errors';
 import user from './api/user';
 import auth from './auth';

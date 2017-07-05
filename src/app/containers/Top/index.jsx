@@ -1,11 +1,13 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import { actions } from './index';
+import { setTopText } from './constants';
 
-const Top = ({ top, onChangeText }: {top: string, onChangeText: Function}) => (
+import type { TopProps } from './types';
+
+const Top = ({ text, onChangeText }: TopProps) => (
   <div>
-    <h1>{top}</h1>
+    <h1>{text}</h1>
     <div>
       <button onClick={e => onChangeText('top text 1')}>text1</button>
       <button onClick={e => onChangeText('top text 2')}>text2</button>
@@ -13,16 +15,16 @@ const Top = ({ top, onChangeText }: {top: string, onChangeText: Function}) => (
   </div>
 );
 
-function mapStateToProps(state) {
+function mapStateToProps(state): TopProps {
   return {
-    top: state.top,
+    ...state.top,
   };
 }
 
 function mapDispatchToProps(dispatch: Function) {
   return {
     onChangeText(text) {
-      dispatch(actions.setTopText(text));
+      dispatch(setTopText(text));
     },
   };
 }
