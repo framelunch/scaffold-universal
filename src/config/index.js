@@ -1,10 +1,6 @@
-import path from 'path';
-
-const root = path.join(process.cwd(), 'src');
 const { DOMAIN, MONGODB_URI } = process.env;
 
 export default {
-  root,
   userRoles: ['guest', 'user', 'admin'], // 配列の順番で権限の序列がある
 
   session: {

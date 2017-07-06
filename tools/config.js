@@ -56,7 +56,7 @@ export default {
 
   browser: {
     proxy: `http://localhost:${PORT}`,
-    port: 9077,
+    port: PORT-1,
     notify: false,
     reloadDebounce: 500
   },

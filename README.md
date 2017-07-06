@@ -1,4 +1,5 @@
-# FRAME LUNCH scaffold for frontend development
+# Race Management Tool
+馬主向けの所有馬を管理するためのWEBアプリケーションです
 
 ## Important Technology
 
@@ -49,18 +50,19 @@
 |- /src
 |    |- /api/               # REST API
 |    |- /app/               # ReactによるSPAモジュール
-|         |- /actions
 |         |- /components
-|         |- /modules
-|         |- /reducers
-|         |- /stores
-|         |- Routes.jsx     # Reactによるルーティング
+|         |- /containers
+|         |- /helpers
+|         |- index.jsx      # FrontEndのエントリポイント 
+|         |- routes.jsx     # Reactによるルーティング
+|         |- ssr.jsx        # For Server Side Rendering 
 |    |- /assets/            # 画像など静的リソース
 |    |- /auth/              # 認証系のAPI
 |    |- /config             # where we do the bulk of our apps configuration
 |         |- /environment/  # configuration specific to the node environment
 |         |- /express.js    # setting for express framework
-|    |- /libs/              # Javascriptのライブラリ
+|    |- /helpers/           # 
+|    |- /libs/              # Javascriptのプライベートライブラリ
 |    |- /scripts/           # Javascriptのエントリーディレクトリ
 |    |- /styles/            # CSSのエントリーディレクトリ
 |    |- /views/             # EJSのエントリーディレクトリ

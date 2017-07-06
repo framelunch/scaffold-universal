@@ -6,10 +6,9 @@ import bodyParser from 'body-parser';
 import methodOverride from 'method-override';
 import cookieParser from 'cookie-parser';
 import path from 'path';
-import config from './index';
 
 const { NODE_ENV } = process.env;
-const { root } = config;
+const root = path.join(process.cwd(), 'src');
 
 export default app => {
   app.set('view engine', 'ejs');
