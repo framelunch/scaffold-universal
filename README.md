@@ -1,5 +1,6 @@
-# Race Management Tool
-馬主向けの所有馬を管理するためのWEBアプリケーションです
+# Deprecated!!
+
+We recommended [here.](https://github.com/framelunch/scaffold-universal-v2)
 
 ## Important Technology
 
